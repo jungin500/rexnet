@@ -115,7 +115,10 @@ class LinearBottleneck(nn.Module):
     def forward(self, x):
         out = self.out(x)
         if self.use_shortcut:
-            out[:, 0:self.in_channels] += x
+            original_channels = x.shape[1]
+            out_left = out[:, :original_channels, :, :] + x
+            out_right = out[:, original_channels:, :, :]
+            out = torch.concat([out_left, out_right], axis=1)
 
         return out
 
