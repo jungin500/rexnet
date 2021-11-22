@@ -113,14 +113,13 @@ class LinearBottleneck(nn.Module):
         self.out = nn.Sequential(*out)
 
     def forward(self, x):
-        out = self.out(x)
+        feature = self.out(x)
         if self.use_shortcut:
-            original_channels = x.shape[1]
-            out_left = out[:, :original_channels, :, :] + x
-            out_right = out[:, original_channels:, :, :]
-            out = torch.concat([out_left, out_right], axis=1)
+            fB, fC, fH, fW = list(feature.shape)
+            x_ext = torch.concat([x, torch.zeros(fB, fC - self.in_channels, fH, fW)], axis=1)
+            feature = feature + x_ext
 
-        return out
+        return feature
 
 
 class ReXNetV1(nn.Module):
