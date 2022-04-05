@@ -5,3 +5,4 @@ __pycache__/
 *.pth
 *.hd5
 *.hdf5
+outputs/

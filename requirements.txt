@@ -1,6 +1,14 @@
+# User-installation packages!
+# User shall install packages via conda, or with pip.
+# torch
+# torchvision
+
+albumentations
+wandb
+pytorch_lightning
+hydra-core
+opencv-python-headless
+numpy
 loguru
-torch>=1.10.0
-onnx>=1.10.2
-onnxruntime>=1.9.0
-onnx-simplifier>=0.3.6
 torchinfo
+scikit-learn
