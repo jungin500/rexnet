@@ -116,7 +116,7 @@ class LinearBottleneck(nn.Module):
         feature = self.out(x)
         if self.use_shortcut:
             fB, fC, fH, fW = list(feature.shape)
-            x_ext = torch.concat([x, torch.zeros(fB, fC - self.in_channels, fH, fW)], axis=1)
+            x_ext = torch.concat([x, torch.zeros(fB, fC - self.in_channels, fH, fW, device=x.device)], axis=1)
             feature = feature + x_ext
 
         return feature

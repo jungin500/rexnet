@@ -17,9 +17,9 @@ class LightningModel(pl.LightningModule):
         super().__init__()
         
         if config.model.type == 'small':
-            self.model = ReXNetV1_lite(num_classes=config.model.num_classes, multiplier=0.125)
+            self.model = ReXNetV1_lite(classes=config.model.num_classes, multiplier=0.125)
         elif config.model.type == 'large':
-            self.model = ReXNetV1(num_classes=config.model.num_classes, width_mult=0.5, depth_mult=0.33)
+            self.model = ReXNetV1(classes=config.model.num_classes, width_mult=0.5, depth_mult=0.33)
         else:
             raise RuntimeError("Invalid model type: " + config.model.type)
         
