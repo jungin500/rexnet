@@ -38,6 +38,7 @@ class LightningModel(pl.LightningModule):
         self.loss_module = torch.nn.CrossEntropyLoss()
         self.use_ema = bool(config.train.ema.enabled)
         if self.use_ema:
+            from torch_ema import ExponentialMovingAverage
             self.ema = ExponentialMovingAverage(self.model.parameters(), decay=config.train.ema.decay)
         self.forward_idx = 0
 
