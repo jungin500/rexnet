@@ -38,8 +38,7 @@ class LightningModel(pl.LightningModule):
         self.loss_module = torch.nn.CrossEntropyLoss()
         self.use_ema = bool(config.train.ema.enabled)
         if self.use_ema:
-            logger.error("Required to setup EMA on model.py manually. also, install torch_ema package!")
-            # self.ema = ExponentialMovingAverage(self.model.parameters(), decay=config.train.ema.decay)
+            self.ema = ExponentialMovingAverage(self.model.parameters(), decay=config.train.ema.decay)
         self.forward_idx = 0
 
         if bool(config.model.pretrained.enabled):
